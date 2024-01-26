@@ -38,7 +38,7 @@ Swift Stock is an open source Warehouse Management System (WMS) developed by Lex
 ### Prerequisites
 
 - Go (at least version 1.20)
-- MySQL(or equivalent)
+- PostgresSQL(or equivalent)
 - NPM
 
 ### Installation
