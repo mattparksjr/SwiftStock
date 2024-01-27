@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"swiftstock_api/app/controller"
 	"swiftstock_api/app/database"
 	"swiftstock_api/app/model"
 
@@ -13,14 +14,24 @@ func main() {
 
 	loadEnv()
 	loadDatabase()
+	serve()
+}
 
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
+func serve() {
+
+	router := gin.Default()
+
+	publicRoutes := router.Group("/auth")
+	publicRoutes.POST("/register", controller.Register)
+	publicRoutes.POST("/login", controller.Login)
+
+	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
-	r.Run() // listen and serve on 0.0.0.0:8080
+	
+	router.Run() // listen and serve on 0.0.0.0:8080
 }
 
 func loadDatabase() {
